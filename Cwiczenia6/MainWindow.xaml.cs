@@ -357,8 +357,9 @@ namespace Cwiczenia6
         { var sals = from emp in Emps group emp by emp.Deptno into g select new { Value = g.Min(sal=>sal.Sal) };
            
             DataGrid.ItemsSource = sals;
-            var result = Emps.Where(emp => Emps.GroupBy(a => a.Deptno).Select(a => Emps.Min(b => b.Sal)).Contains(emp.Sal));
+            var result = Emps.Where(emp => sals.Any(a=>a.Value==emp.Sal));
             DataGrid.ItemsSource = result;
+           
         }
 
         private void Button_Click_21(object sender, RoutedEventArgs e)
